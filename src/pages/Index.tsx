@@ -1,7 +1,9 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { motion } from "framer-motion";
 import ParticleCanvas from "@/components/ParticleCanvas";
 import ReflectionZone from "@/components/ReflectionZone";
+import Footer from "@/components/Footer";
+import CookieBanner from "@/components/CookieBanner";
 
 const ZONES = [
   {
@@ -72,7 +74,8 @@ export default function Index() {
     setAnswers((prev) => ({ ...prev, [question]: answer }));
   }, []);
 
-  const totalAnswered = Object.keys(answers).length;
+  const answeredSet = useMemo(() => new Set(Object.keys(answers)), [answers]);
+  const totalAnswered = answeredSet.size;
   const totalQuestions = ZONES.reduce((acc, z) => acc + z.questions.length, 0);
 
   return (
@@ -133,6 +136,7 @@ export default function Index() {
             questions={zone.questions}
             zoneColor={zone.zoneColor}
             onAnswer={handleAnswer}
+            answeredQuestions={answeredSet}
           />
         ))}
       </div>
@@ -178,11 +182,10 @@ export default function Index() {
       )}
 
       {/* Footer */}
-      <footer className="relative z-10 text-center py-16">
-        <div className="mono text-xs text-muted-foreground/30 tracking-widest uppercase">
-          The Altar of the Circuit — v0.1
-        </div>
-      </footer>
+      <Footer />
+
+      {/* Cookie Banner */}
+      <CookieBanner />
     </div>
   );
 }
