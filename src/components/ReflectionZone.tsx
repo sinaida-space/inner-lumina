@@ -1,0 +1,75 @@
+import { motion } from "framer-motion";
+import QuestionCard from "./QuestionCard";
+
+interface ReflectionZoneProps {
+  title: string;
+  subtitle: string;
+  sectorLabel: string;
+  questions: string[];
+  zoneColor: "amber" | "magenta" | "teal";
+  onAnswer: (question: string, answer: string) => void;
+}
+
+const oracleTransition = {
+  duration: 0.8,
+  ease: [0.22, 1, 0.36, 1] as const,
+};
+
+export default function ReflectionZone({
+  title,
+  subtitle,
+  sectorLabel,
+  questions,
+  zoneColor,
+  onAnswer,
+}: ReflectionZoneProps) {
+  return (
+    <section className="relative min-h-screen py-24">
+      {/* Zone header */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={oracleTransition}
+        className="text-center mb-20 px-6"
+      >
+        <div className="mono text-xs tracking-[0.3em] text-muted-foreground mb-4 uppercase">
+          {sectorLabel}
+        </div>
+        <h2
+          className={`font-fraunces text-4xl md:text-5xl lg:text-6xl mb-4 ${
+            zoneColor === "amber"
+              ? "text-candle-amber text-glow-amber"
+              : zoneColor === "magenta"
+              ? "text-magenta-pulse text-glow-magenta"
+              : "text-ghost-teal text-glow-teal"
+          }`}
+        >
+          {title}
+        </h2>
+        <p className="text-muted-foreground font-body text-sm max-w-md mx-auto">
+          {subtitle}
+        </p>
+
+        {/* Filament divider */}
+        <div className="filament h-24 mx-auto mt-8 animate-pulse-glow" />
+      </motion.div>
+
+      {/* Questions */}
+      <div className="relative">
+        {questions.map((q, i) => (
+          <QuestionCard
+            key={q}
+            question={q}
+            index={i}
+            zoneColor={zoneColor}
+            onAnswer={(ans) => onAnswer(q, ans)}
+          />
+        ))}
+      </div>
+
+      {/* Zone transition filament */}
+      <div className="filament h-40 mx-auto animate-pulse-glow" />
+    </section>
+  );
+}
