@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import QuestionCard from "./QuestionCard";
+import QuestionReveal from "./QuestionReveal";
 
 interface ReflectionZoneProps {
   title: string;
@@ -8,6 +8,7 @@ interface ReflectionZoneProps {
   questions: string[];
   zoneColor: "amber" | "magenta" | "teal";
   onAnswer: (question: string, answer: string) => void;
+  answeredQuestions: Set<string>;
 }
 
 const oracleTransition = {
@@ -22,6 +23,7 @@ export default function ReflectionZone({
   questions,
   zoneColor,
   onAnswer,
+  answeredQuestions,
 }: ReflectionZoneProps) {
   return (
     <section className="relative min-h-screen py-24">
@@ -31,7 +33,7 @@ export default function ReflectionZone({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
         transition={oracleTransition}
-        className="text-center mb-20 px-6"
+        className="text-center mb-12 px-6"
       >
         <div className="mono text-xs tracking-[0.3em] text-muted-foreground mb-4 uppercase">
           {sectorLabel}
@@ -52,24 +54,19 @@ export default function ReflectionZone({
         </p>
 
         {/* Filament divider */}
-        <div className="filament h-24 mx-auto mt-8 animate-pulse-glow" />
+        <div className="filament h-16 mx-auto mt-8 animate-pulse-glow" />
       </motion.div>
 
-      {/* Questions */}
-      <div className="relative">
-        {questions.map((q, i) => (
-          <QuestionCard
-            key={q}
-            question={q}
-            index={i}
-            zoneColor={zoneColor}
-            onAnswer={(ans) => onAnswer(q, ans)}
-          />
-        ))}
-      </div>
+      {/* Star + Question Card */}
+      <QuestionReveal
+        questions={questions}
+        zoneColor={zoneColor}
+        onAnswer={onAnswer}
+        answeredQuestions={answeredQuestions}
+      />
 
       {/* Zone transition filament */}
-      <div className="filament h-40 mx-auto animate-pulse-glow" />
+      <div className="filament h-40 mx-auto animate-pulse-glow mt-12" />
     </section>
   );
 }
