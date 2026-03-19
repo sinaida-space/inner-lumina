@@ -55,6 +55,12 @@ export default function Footer() {
           <div className="mono text-xs text-foreground/30 tracking-widest uppercase">
             The Altar of the Circuit — v0.1 — © {new Date().getFullYear()}
           </div>
+          <div className="mono text-xs text-foreground/20">
+            Made with good vibes by{" "}
+            <a href="https://sinaida.eu/" target="_blank" rel="noopener noreferrer" className="text-ghost-teal/50 hover:text-ghost-teal transition-colors">
+              Sinaida
+            </a>
+          </div>
         </div>
       </footer>
 
