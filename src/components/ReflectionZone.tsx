@@ -27,7 +27,6 @@ export default function ReflectionZone({
 }: ReflectionZoneProps) {
   return (
     <section className="relative min-h-screen py-24">
-      {/* Zone header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -35,11 +34,11 @@ export default function ReflectionZone({
         transition={oracleTransition}
         className="text-center mb-12 px-6"
       >
-        <div className="mono text-xs tracking-[0.3em] text-muted-foreground mb-4 uppercase">
+        <div className="mono text-xs tracking-[0.3em] text-foreground/50 mb-4 uppercase">
           {sectorLabel}
         </div>
         <h2
-          className={`font-fraunces text-4xl md:text-5xl lg:text-6xl mb-4 ${
+          className={`font-gothic text-4xl md:text-5xl lg:text-6xl mb-4 ${
             zoneColor === "amber"
               ? "text-candle-amber text-glow-amber"
               : zoneColor === "magenta"
@@ -49,15 +48,13 @@ export default function ReflectionZone({
         >
           {title}
         </h2>
-        <p className="text-muted-foreground font-body text-sm max-w-md mx-auto">
+        <p className="text-foreground/50 mono text-xs max-w-md mx-auto">
           {subtitle}
         </p>
 
-        {/* Filament divider */}
         <div className="filament h-16 mx-auto mt-8 animate-pulse-glow" />
       </motion.div>
 
-      {/* Star + Question Card */}
       <QuestionReveal
         questions={questions}
         zoneColor={zoneColor}
@@ -65,7 +62,6 @@ export default function ReflectionZone({
         answeredQuestions={answeredQuestions}
       />
 
-      {/* Zone transition filament */}
       <div className="filament h-40 mx-auto animate-pulse-glow mt-12" />
     </section>
   );

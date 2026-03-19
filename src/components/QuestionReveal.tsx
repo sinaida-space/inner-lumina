@@ -1,6 +1,7 @@
 import { useState, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import StarButton from "./StarButton";
+import ShareImageCanvas from "./ShareImageCanvas";
 
 interface QuestionRevealProps {
   questions: string[];
@@ -18,6 +19,7 @@ export default function QuestionReveal({ questions, zoneColor, onAnswer, answere
   const [currentQuestion, setCurrentQuestion] = useState<string | null>(null);
   const [answer, setAnswer] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [shareData, setShareData] = useState<{ question: string; answer: string } | null>(null);
 
   const remaining = useMemo(
     () => questions.filter((q) => !answeredQuestions.has(q)),
@@ -36,11 +38,14 @@ export default function QuestionReveal({ questions, zoneColor, onAnswer, answere
     if (!answer.trim() || !currentQuestion) return;
     setSubmitting(true);
     onAnswer(currentQuestion, answer);
+    const q = currentQuestion;
+    const a = answer;
     setTimeout(() => {
+      setShareData({ question: q, answer: a });
       setCurrentQuestion(null);
       setAnswer("");
       setSubmitting(false);
-    }, 1200);
+    }, 800);
   }, [answer, currentQuestion, onAnswer]);
 
   const colorClasses = {
@@ -64,7 +69,7 @@ export default function QuestionReveal({ questions, zoneColor, onAnswer, answere
             className="flex flex-col items-center gap-6"
           >
             <StarButton color={zoneColor} onClick={pickRandom} disabled={allDone} />
-            <div className="mono text-xs tracking-widest text-muted-foreground/50 uppercase">
+            <div className="mono text-xs tracking-widest text-foreground/50 uppercase">
               {allDone
                 ? "All fragments collected"
                 : `${remaining.length} fragments remaining`}
@@ -77,7 +82,7 @@ export default function QuestionReveal({ questions, zoneColor, onAnswer, answere
             animate={{ opacity: 1, x: 0, scale: 1, filter: "blur(0px)" }}
             exit={{ opacity: 0, x: -80, scale: 0.9, filter: "blur(12px)" }}
             transition={oracleTransition}
-            className="glass-screen rounded-lg p-8 md:p-10 max-w-xl w-full relative"
+            className="glass-screen bloom-border rounded-lg p-8 md:p-10 max-w-xl w-full relative"
           >
             {/* Particle wind decorative dots */}
             {Array.from({ length: 12 }).map((_, i) => (
@@ -97,11 +102,11 @@ export default function QuestionReveal({ questions, zoneColor, onAnswer, answere
               />
             ))}
 
-            <div className="mono text-xs tracking-widest text-muted-foreground/50 mb-6 uppercase">
+            <div className="mono text-xs tracking-widest text-foreground/50 mb-6 uppercase">
               Fragment Revealed
             </div>
 
-            <h3 className={`font-fraunces text-2xl md:text-3xl leading-relaxed mb-8 ${colorClasses[zoneColor]}`}>
+            <h3 className={`font-gothic text-2xl md:text-3xl leading-relaxed mb-8 ${colorClasses[zoneColor]}`}>
               {currentQuestion}
             </h3>
 
@@ -117,13 +122,13 @@ export default function QuestionReveal({ questions, zoneColor, onAnswer, answere
                     }
                   }}
                   placeholder="Speak your truth..."
-                  rows={2}
-                  className="input-line w-full text-foreground text-lg pb-3 resize-none placeholder:text-muted-foreground/40 font-body"
+                  rows={3}
+                  className="input-line w-full text-foreground text-base pb-3 resize-none mono"
                 />
                 <div className="flex justify-between items-center mt-4">
                   <button
                     onClick={() => { setCurrentQuestion(null); setAnswer(""); }}
-                    className="mono text-xs tracking-widest text-muted-foreground/40 hover:text-muted-foreground/70 transition-opacity uppercase"
+                    className="mono text-xs tracking-widest text-foreground/40 hover:text-foreground/70 transition-colors uppercase"
                   >
                     ✕ Dismiss
                   </button>
@@ -132,7 +137,7 @@ export default function QuestionReveal({ questions, zoneColor, onAnswer, answere
                       initial={{ opacity: 0, scale: 0.9 }}
                       animate={{ opacity: 1, scale: 1 }}
                       onClick={handleSubmit}
-                      className="mono text-xs tracking-widest text-primary opacity-70 hover:opacity-100 transition-opacity uppercase"
+                      className="mono text-xs tracking-widest text-primary hover:text-primary/80 transition-colors uppercase"
                     >
                       ↵ Commit to the machine
                     </motion.button>
@@ -145,7 +150,7 @@ export default function QuestionReveal({ questions, zoneColor, onAnswer, answere
                 animate={{ opacity: 1 }}
                 className="text-center py-4"
               >
-                <div className="mono text-xs text-ghost-teal opacity-80">
+                <div className="mono text-xs text-ghost-teal">
                   ✓ Integrated into constellation
                 </div>
               </motion.div>
@@ -153,6 +158,16 @@ export default function QuestionReveal({ questions, zoneColor, onAnswer, answere
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Share Image Modal */}
+      {shareData && (
+        <ShareImageCanvas
+          question={shareData.question}
+          answer={shareData.answer}
+          zoneColor={zoneColor}
+          onClose={() => setShareData(null)}
+        />
+      )}
     </div>
   );
 }

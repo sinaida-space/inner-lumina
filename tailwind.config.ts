@@ -14,7 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        fraunces: ["Fraunces", "serif"],
+        gothic: ["CloisterBlack", "serif"],
         mono: ["JetBrains Mono", "monospace"],
         body: ["Inter", "sans-serif"],
       },
