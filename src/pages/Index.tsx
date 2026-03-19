@@ -84,10 +84,10 @@ export default function Index() {
 
       {/* Fixed status bar */}
       <div className="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex justify-between items-center">
-        <div className="mono text-xs tracking-widest text-muted-foreground uppercase opacity-60">
+        <div className="mono text-xs tracking-widest text-foreground/60 uppercase">
           The Altar of the Circuit
         </div>
-        <div className="mono text-xs tracking-widest text-ghost-teal opacity-60">
+        <div className="mono text-xs tracking-widest text-ghost-teal">
           {totalAnswered}/{totalQuestions} Fragments
         </div>
       </div>
@@ -107,18 +107,18 @@ export default function Index() {
           <div className="mono text-xs tracking-[0.4em] text-magenta-pulse mb-8 uppercase animate-pulse-glow">
             System Initialized
           </div>
-          <h1 className="font-fraunces text-5xl md:text-7xl lg:text-8xl text-glow-amber text-candle-amber mb-6 leading-[1.1]">
+          <h1 className="font-gothic text-5xl md:text-7xl lg:text-8xl text-glow-amber text-candle-amber mb-6 leading-[1.1]">
             Initialize
             <br />
             Reflection
           </h1>
-          <p className="text-muted-foreground font-body text-lg max-w-lg mx-auto mb-12">
+          <p className="text-foreground/60 mono text-sm max-w-lg mx-auto mb-12">
             The machine is listening. Scroll to descend into the circuitry of self.
           </p>
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="text-muted-foreground/40 text-2xl"
+            className="text-foreground/40 text-2xl"
           >
             ↓
           </motion.div>
@@ -153,7 +153,7 @@ export default function Index() {
           <div className="mono text-xs tracking-[0.3em] text-ghost-teal mb-6 uppercase">
             Constellation Complete
           </div>
-          <h2 className="font-fraunces text-4xl md:text-5xl text-glow-teal text-ghost-teal mb-12">
+          <h2 className="font-gothic text-4xl md:text-5xl text-glow-teal text-ghost-teal mb-12">
             Your Soul Map
           </h2>
           <div className="max-w-2xl mx-auto grid gap-4">
@@ -164,27 +164,24 @@ export default function Index() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ ...oracleTransition, delay: i * 0.05 }}
-                className="glass-screen rounded-lg p-5 text-left"
+                className="glass-screen bloom-border rounded-lg p-5 text-left"
               >
-                <div className="mono text-xs text-candle-amber/60 mb-2">
+                <div className="mono text-xs text-candle-amber/70 mb-2">
                   {q}
                 </div>
-                <p className="text-foreground/70 text-sm font-body italic">
+                <p className="text-foreground/80 text-sm mono italic">
                   "{a}"
                 </p>
               </motion.div>
             ))}
           </div>
-          <div className="mono text-xs text-muted-foreground mt-16 opacity-40">
+          <div className="mono text-xs text-foreground/40 mt-16">
             {totalAnswered} fragments integrated into the machine
           </div>
         </motion.section>
       )}
 
-      {/* Footer */}
       <Footer />
-
-      {/* Cookie Banner */}
       <CookieBanner />
     </div>
   );

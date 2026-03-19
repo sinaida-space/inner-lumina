@@ -10,7 +10,6 @@ interface Particle {
   size: number;
   alpha: number;
   color: string;
-  zone: number; // 0=noise, 1=lattice, 2=convergence
   speed: number;
 }
 
@@ -23,6 +22,7 @@ const COLORS = {
 export default function ParticleCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const scrollRef = useRef(0);
+  const mouseRef = useRef({ x: 0, y: 0, active: false });
   const particlesRef = useRef<Particle[]>([]);
   const animRef = useRef<number>(0);
 
@@ -30,7 +30,7 @@ export default function ParticleCanvas() {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d")!;
-    
+
     const resize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
@@ -38,8 +38,7 @@ export default function ParticleCanvas() {
     resize();
     window.addEventListener("resize", resize);
 
-    // Initialize particles
-    const count = Math.min(200, Math.floor(window.innerWidth * 0.15));
+    const count = Math.min(250, Math.floor(window.innerWidth * 0.18));
     const particles: Particle[] = [];
     for (let i = 0; i < count; i++) {
       const colorKeys = Object.keys(COLORS) as (keyof typeof COLORS)[];
@@ -51,10 +50,9 @@ export default function ParticleCanvas() {
         baseY: Math.random() * canvas.height,
         vx: (Math.random() - 0.5) * 0.3,
         vy: (Math.random() - 0.5) * 0.3,
-        size: Math.random() * 2 + 0.5,
+        size: Math.random() * 2.5 + 0.5,
         alpha: Math.random() * 0.6 + 0.1,
         color: COLORS[colorKey],
-        zone: Math.floor(Math.random() * 3),
         speed: Math.random() * 0.5 + 0.2,
       });
     }
@@ -66,30 +64,57 @@ export default function ParticleCanvas() {
     };
     window.addEventListener("scroll", onScroll, { passive: true });
 
+    const onMouseMove = (e: MouseEvent) => {
+      mouseRef.current = { x: e.clientX, y: e.clientY, active: true };
+    };
+    const onMouseLeave = () => {
+      mouseRef.current.active = false;
+    };
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
+    window.addEventListener("mouseleave", onMouseLeave);
+
     let time = 0;
     const animate = () => {
       time += 0.005;
-      const progress = scrollRef.current; // 0 to 1
+      const progress = scrollRef.current;
+      const mouse = mouseRef.current;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       for (const p of particles) {
-        // Zone behavior based on scroll
+        // Mouse interaction — particles are attracted/repelled
+        if (mouse.active) {
+          const mdx = mouse.x - p.x;
+          const mdy = mouse.y - p.y;
+          const mDist = Math.sqrt(mdx * mdx + mdy * mdy);
+          const influence = Math.max(0, 1 - mDist / 200);
+          // Gentle orbit around cursor
+          if (mDist < 200 && mDist > 20) {
+            const angle = Math.atan2(mdy, mdx);
+            p.x += Math.cos(angle + Math.PI / 2) * influence * 1.5;
+            p.y += Math.sin(angle + Math.PI / 2) * influence * 1.5;
+            // slight attraction
+            p.x += mdx * influence * 0.005;
+            p.y += mdy * influence * 0.005;
+          } else if (mDist < 20) {
+            // repel if too close
+            p.x -= mdx * 0.05;
+            p.y -= mdy * 0.05;
+          }
+        }
+
+        // Scroll-based zone behavior
         if (progress < 0.33) {
-          // Zone 1: Random drift (noise)
-          p.x += p.vx + Math.sin(time + p.baseY * 0.01) * 0.3;
-          p.y += p.vy + Math.cos(time + p.baseX * 0.01) * 0.3;
+          p.x += p.vx + Math.sin(time + p.baseY * 0.01) * 0.4;
+          p.y += p.vy + Math.cos(time + p.baseX * 0.01) * 0.4;
         } else if (progress < 0.66) {
-          // Zone 2: Lattice formation
           const lerpFactor = (progress - 0.33) / 0.33;
           const gridX = Math.round(p.baseX / 80) * 80;
           const gridY = Math.round(p.baseY / 80) * 80;
           p.x += (gridX - p.x) * 0.02 * lerpFactor + p.vx * (1 - lerpFactor);
           p.y += (gridY - p.y) * 0.02 * lerpFactor + p.vy * (1 - lerpFactor);
-          // Subtle oscillation
           p.x += Math.sin(time * 2 + p.baseY * 0.05) * 0.5 * (1 - lerpFactor);
           p.y += Math.cos(time * 2 + p.baseX * 0.05) * 0.5 * (1 - lerpFactor);
         } else {
-          // Zone 3: Spherical convergence
           const lerpFactor = (progress - 0.66) / 0.34;
           const cx = canvas.width / 2;
           const cy = canvas.height / 2;
@@ -101,27 +126,32 @@ export default function ParticleCanvas() {
           p.y += (targetY - p.y) * 0.03;
         }
 
+        // Scroll velocity burst — particles scatter on fast scroll
+        const scrollSpeed = Math.abs(progress - (scrollRef.current || 0));
+        p.x += (Math.random() - 0.5) * scrollSpeed * 20;
+        p.y += (Math.random() - 0.5) * scrollSpeed * 20;
+
         // Wrap
         if (p.x < -10) p.x = canvas.width + 10;
         if (p.x > canvas.width + 10) p.x = -10;
         if (p.y < -10) p.y = canvas.height + 10;
         if (p.y > canvas.height + 10) p.y = -10;
 
-        // Draw
+        // Draw with enhanced glow
         const glowAlpha = p.alpha * (0.6 + Math.sin(time * 3 + p.baseX) * 0.4);
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fillStyle = `hsla(${p.color}, ${glowAlpha})`;
         ctx.fill();
 
-        // Glow
+        // Outer glow
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size * 3, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${p.color}, ${glowAlpha * 0.15})`;
+        ctx.arc(p.x, p.y, p.size * 4, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${p.color}, ${glowAlpha * 0.1})`;
         ctx.fill();
       }
 
-      // Draw filament connections between nearby particles
+      // Filament connections
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
@@ -149,6 +179,8 @@ export default function ParticleCanvas() {
       cancelAnimationFrame(animRef.current);
       window.removeEventListener("resize", resize);
       window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseleave", onMouseLeave);
     };
   }, []);
 
