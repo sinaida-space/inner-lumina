@@ -145,7 +145,7 @@ export default function Index() {
 
       {/* Zones */}
       <div className="relative z-10">
-        {ZONES.map((zone) => (
+        {shuffledZones.map((zone) => (
           <ReflectionZone
             key={zone.title}
             title={zone.title}
