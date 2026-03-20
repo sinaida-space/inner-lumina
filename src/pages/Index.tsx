@@ -102,7 +102,7 @@ export default function Index() {
 
       {/* Fixed status bar */}
       <div className="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex justify-between items-center">
-        <div className="mono text-xs tracking-widest text-foreground/60 uppercase">
+        <div className="mono text-xs tracking-widest text-candle-amber/60 uppercase">
           The Altar of the Circuit
         </div>
         <div className="mono text-xs tracking-widest text-ghost-teal">
