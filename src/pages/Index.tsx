@@ -203,7 +203,7 @@ export default function Index() {
           >
             ✦ Share My Constellation
           </motion.button>
-          <div className="mono text-xs text-foreground/40 mt-8">
+          <div className="mono text-xs text-ghost-teal/50 mt-8">
             {totalAnswered} fragments integrated into the machine
           </div>
         </motion.section>

@@ -87,7 +87,7 @@ export default function Footer() {
                 <h3 className="font-gothic text-xl text-ghost-teal">Privacy Policy</h3>
                 <button
                   onClick={() => setShowPrivacy(false)}
-                  className="mono text-xs text-foreground/40 hover:text-foreground/80 transition-colors"
+                  className="mono text-xs text-candle-amber/50 hover:text-candle-amber/80 transition-colors"
                 >
                   ✕
                 </button>

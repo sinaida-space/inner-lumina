@@ -214,7 +214,7 @@ export default function ConstellationShareCanvas({ answers, onClose }: Constella
             </button>
           </div>
 
-          <p className="mono text-xs text-foreground/40 text-center">
+          <p className="mono text-xs text-ghost-teal/50 text-center">
             Share your constellation on Instagram Stories ✦
           </p>
         </motion.div>

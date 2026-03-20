@@ -191,7 +191,7 @@ export default function ShareImageCanvas({ question, answer, zoneColor, onClose 
             </button>
           </div>
 
-          <p className="mono text-xs text-foreground/40 text-center">
+          <p className="mono text-xs text-ghost-teal/50 text-center">
             Share your reflection on Instagram Stories ✦
           </p>
         </motion.div>
