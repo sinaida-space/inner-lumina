@@ -109,7 +109,7 @@ export default function StarButton({ color, onClick, disabled }: StarButtonProps
         ref={canvasRef}
         className="absolute inset-0 w-full h-full pointer-events-none"
       />
-      <span className="absolute inset-0 flex items-center justify-center mono text-xs tracking-widest text-foreground/60 group-hover:text-foreground/90 transition-colors uppercase">
+      <span className="absolute inset-0 flex items-center justify-center mono text-xs tracking-widest text-candle-amber/60 group-hover:text-candle-amber transition-colors uppercase">
         Invoke
       </span>
     </button>

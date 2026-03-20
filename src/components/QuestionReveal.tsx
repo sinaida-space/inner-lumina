@@ -69,7 +69,7 @@ export default function QuestionReveal({ questions, zoneColor, onAnswer, answere
             className="flex flex-col items-center gap-6"
           >
             <StarButton color={zoneColor} onClick={pickRandom} disabled={allDone} />
-            <div className="mono text-xs tracking-widest text-foreground/50 uppercase">
+            <div className="mono text-xs tracking-widest text-muted-foreground uppercase">
               {allDone
                 ? "All fragments collected"
                 : `${remaining.length} fragments remaining`}
@@ -82,7 +82,7 @@ export default function QuestionReveal({ questions, zoneColor, onAnswer, answere
             animate={{ opacity: 1, x: 0, scale: 1, filter: "blur(0px)" }}
             exit={{ opacity: 0, x: -80, scale: 0.9, filter: "blur(12px)" }}
             transition={oracleTransition}
-            className="glass-screen bloom-border rounded-lg p-8 md:p-10 max-w-xl w-full relative"
+            className="glass-screen bloom-border hover-bloom rounded-lg p-8 md:p-10 max-w-xl w-full relative"
           >
             {/* Particle wind decorative dots */}
             {Array.from({ length: 12 }).map((_, i) => (
@@ -102,7 +102,7 @@ export default function QuestionReveal({ questions, zoneColor, onAnswer, answere
               />
             ))}
 
-            <div className="mono text-xs tracking-widest text-foreground/50 mb-6 uppercase">
+            <div className="mono text-xs tracking-widest text-muted-foreground mb-6 uppercase">
               Fragment Revealed
             </div>
 
@@ -128,7 +128,7 @@ export default function QuestionReveal({ questions, zoneColor, onAnswer, answere
                 <div className="flex justify-between items-center mt-4">
                   <button
                     onClick={() => { setCurrentQuestion(null); setAnswer(""); }}
-                    className="mono text-xs tracking-widest text-foreground/40 hover:text-foreground/70 transition-colors uppercase"
+                    className="mono text-xs tracking-widest text-candle-amber/50 hover:text-candle-amber/80 transition-colors uppercase"
                   >
                     ✕ Dismiss
                   </button>
