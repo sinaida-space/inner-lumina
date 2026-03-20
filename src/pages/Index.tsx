@@ -182,7 +182,7 @@ export default function Index() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ ...oracleTransition, delay: i * 0.05 }}
-                className="glass-screen bloom-border rounded-lg p-5 text-left"
+                className="glass-screen bloom-border hover-bloom rounded-lg p-5 text-left"
               >
                 <div className="mono text-xs text-candle-amber/70 mb-2">
                   {q}
