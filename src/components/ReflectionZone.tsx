@@ -34,7 +34,7 @@ export default function ReflectionZone({
         transition={oracleTransition}
         className="text-center mb-12 px-6"
       >
-        <div className="mono text-xs tracking-[0.3em] text-foreground/50 mb-4 uppercase">
+        <div className="mono text-xs tracking-[0.3em] text-muted-foreground mb-4 uppercase">
           {sectorLabel}
         </div>
         <h2
