@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useRef } from "react";
 import { motion } from "framer-motion";
 import ParticleCanvas from "@/components/ParticleCanvas";
 import ReflectionZone from "@/components/ReflectionZone";
