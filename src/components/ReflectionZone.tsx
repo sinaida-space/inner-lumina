@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import QuestionReveal from "./QuestionReveal";
+import ParticleText from "./ParticleText";
 
 interface ReflectionZoneProps {
   title: string;
@@ -37,17 +38,9 @@ export default function ReflectionZone({
         <div className="mono text-xs tracking-[0.3em] text-foreground/50 mb-4 uppercase">
           {sectorLabel}
         </div>
-        <h2
-          className={`font-gothic text-4xl md:text-5xl lg:text-6xl mb-4 ${
-            zoneColor === "amber"
-              ? "text-candle-amber text-glow-amber"
-              : zoneColor === "magenta"
-              ? "text-magenta-pulse text-glow-magenta"
-              : "text-ghost-teal text-glow-teal"
-          }`}
-        >
-          {title}
-        </h2>
+
+        <ParticleText text={title} color={zoneColor} className="mb-4" />
+
         <p className="text-foreground/50 mono text-xs max-w-md mx-auto">
           {subtitle}
         </p>

@@ -217,6 +217,7 @@ export default function Index() {
         />
       )}
 
+      <AmbientDrone />
       <Footer />
       <CookieBanner />
     </div>
