@@ -128,7 +128,7 @@ export default function QuestionReveal({ questions, zoneColor, onAnswer, answere
                 <div className="flex justify-between items-center mt-4">
                   <button
                     onClick={() => { setCurrentQuestion(null); setAnswer(""); }}
-                    className="mono text-xs tracking-widest text-foreground/40 hover:text-foreground/70 transition-colors uppercase"
+                    className="mono text-xs tracking-widest text-candle-amber/50 hover:text-candle-amber/80 transition-colors uppercase"
                   >
                     ✕ Dismiss
                   </button>
