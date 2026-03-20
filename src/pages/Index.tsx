@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import CookieBanner from "@/components/CookieBanner";
 import ShareImageCanvas from "@/components/ShareImageCanvas";
 import ConstellationShareCanvas from "@/components/ConstellationShareCanvas";
+import AmbientDrone from "@/components/AmbientDrone";
 
 const ZONES = [
   {
