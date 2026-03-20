@@ -102,7 +102,7 @@ export default function QuestionReveal({ questions, zoneColor, onAnswer, answere
               />
             ))}
 
-            <div className="mono text-xs tracking-widest text-foreground/50 mb-6 uppercase">
+            <div className="mono text-xs tracking-widest text-muted-foreground mb-6 uppercase">
               Fragment Revealed
             </div>
 
