@@ -11,7 +11,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <h4 className="font-gothic text-xl text-candle-amber mb-3">The Altar of the Circuit</h4>
-            <p className="text-foreground/50 text-xs leading-relaxed mono">
+            <p className="text-muted-foreground text-xs leading-relaxed mono">
               A spiritual machine for self-reflection. Look inward, trace the circuits of memory.
             </p>
           </div>
