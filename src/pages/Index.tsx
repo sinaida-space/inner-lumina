@@ -1,9 +1,11 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useRef } from "react";
 import { motion } from "framer-motion";
 import ParticleCanvas from "@/components/ParticleCanvas";
 import ReflectionZone from "@/components/ReflectionZone";
 import Footer from "@/components/Footer";
 import CookieBanner from "@/components/CookieBanner";
+import ShareImageCanvas from "@/components/ShareImageCanvas";
+import ConstellationShareCanvas from "@/components/ConstellationShareCanvas";
 
 const ZONES = [
   {
@@ -67,8 +69,24 @@ const oracleTransition = {
   ease: [0.22, 1, 0.36, 1] as const,
 };
 
+// Shuffle helper
+function shuffleArray<T>(arr: T[]): T[] {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
 export default function Index() {
   const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [showConstellationShare, setShowConstellationShare] = useState(false);
+
+  // Shuffle questions once on mount using useRef
+  const shuffledZones = useRef(
+    ZONES.map((zone) => ({ ...zone, questions: shuffleArray(zone.questions) }))
+  ).current;
 
   const handleAnswer = useCallback((question: string, answer: string) => {
     setAnswers((prev) => ({ ...prev, [question]: answer }));
@@ -127,7 +145,7 @@ export default function Index() {
 
       {/* Zones */}
       <div className="relative z-10">
-        {ZONES.map((zone) => (
+        {shuffledZones.map((zone) => (
           <ReflectionZone
             key={zone.title}
             title={zone.title}
@@ -175,10 +193,27 @@ export default function Index() {
               </motion.div>
             ))}
           </div>
-          <div className="mono text-xs text-foreground/40 mt-16">
+          <motion.button
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ ...oracleTransition, delay: 0.3 }}
+            onClick={() => setShowConstellationShare(true)}
+            className="mono text-xs tracking-widest text-candle-amber hover:text-candle-amber/80 transition-colors uppercase px-8 py-4 border border-candle-amber/40 rounded-sm hover:border-candle-amber/60 bloom-border mt-12"
+          >
+            ✦ Share My Constellation
+          </motion.button>
+          <div className="mono text-xs text-foreground/40 mt-8">
             {totalAnswered} fragments integrated into the machine
           </div>
         </motion.section>
+      )}
+
+      {showConstellationShare && (
+        <ConstellationShareCanvas
+          answers={answers}
+          onClose={() => setShowConstellationShare(false)}
+        />
       )}
 
       <Footer />
