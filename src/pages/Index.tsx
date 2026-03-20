@@ -193,7 +193,17 @@ export default function Index() {
               </motion.div>
             ))}
           </div>
-          <div className="mono text-xs text-foreground/40 mt-16">
+          <motion.button
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ ...oracleTransition, delay: 0.3 }}
+            onClick={() => setShowConstellationShare(true)}
+            className="mono text-xs tracking-widest text-candle-amber hover:text-candle-amber/80 transition-colors uppercase px-8 py-4 border border-candle-amber/40 rounded-sm hover:border-candle-amber/60 bloom-border mt-12"
+          >
+            ✦ Share My Constellation
+          </motion.button>
+          <div className="mono text-xs text-foreground/40 mt-8">
             {totalAnswered} fragments integrated into the machine
           </div>
         </motion.section>
