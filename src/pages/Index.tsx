@@ -209,6 +209,13 @@ export default function Index() {
         </motion.section>
       )}
 
+      {showConstellationShare && (
+        <ConstellationShareCanvas
+          answers={answers}
+          onClose={() => setShowConstellationShare(false)}
+        />
+      )}
+
       <Footer />
       <CookieBanner />
     </div>
