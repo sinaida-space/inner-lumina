@@ -102,7 +102,7 @@ export default function Index() {
 
       {/* Fixed status bar */}
       <div className="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex justify-between items-center">
-        <div className="mono text-xs tracking-widest text-candle-amber/60 uppercase">
+        <div className="mono text-xs tracking-widest text-foreground/60 uppercase">
           The Altar of the Circuit
         </div>
         <div className="mono text-xs tracking-widest text-ghost-teal">
@@ -130,13 +130,13 @@ export default function Index() {
             <br />
             Reflection
           </h1>
-          <p className="text-muted-foreground mono text-sm max-w-lg mx-auto mb-12">
+          <p className="text-foreground/60 mono text-sm max-w-lg mx-auto mb-12">
             The machine is listening. Scroll to descend into the circuitry of self.
           </p>
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="text-candle-amber/40 text-2xl"
+            className="text-foreground/40 text-2xl"
           >
             ↓
           </motion.div>
@@ -182,7 +182,7 @@ export default function Index() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ ...oracleTransition, delay: i * 0.05 }}
-                className="glass-screen bloom-border hover-bloom rounded-lg p-5 text-left"
+                className="glass-screen bloom-border rounded-lg p-5 text-left"
               >
                 <div className="mono text-xs text-candle-amber/70 mb-2">
                   {q}
@@ -199,11 +199,11 @@ export default function Index() {
             viewport={{ once: true }}
             transition={{ ...oracleTransition, delay: 0.3 }}
             onClick={() => setShowConstellationShare(true)}
-            className="mono text-xs tracking-widest text-candle-amber hover:text-candle-amber/80 transition-colors uppercase px-8 py-4 border border-candle-amber/40 rounded-sm hover:border-candle-amber/60 bloom-border hover-bloom mt-12"
+            className="mono text-xs tracking-widest text-candle-amber hover:text-candle-amber/80 transition-colors uppercase px-8 py-4 border border-candle-amber/40 rounded-sm hover:border-candle-amber/60 bloom-border mt-12"
           >
             ✦ Share My Constellation
           </motion.button>
-          <div className="mono text-xs text-ghost-teal/50 mt-8">
+          <div className="mono text-xs text-foreground/40 mt-8">
             {totalAnswered} fragments integrated into the machine
           </div>
         </motion.section>

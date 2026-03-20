@@ -36,7 +36,7 @@ export default function CookieBanner() {
             <div className="flex gap-3 shrink-0">
               <button
                 onClick={handleReject}
-                className="mono text-xs tracking-widest text-candle-amber/60 hover:text-candle-amber transition-colors uppercase px-4 py-2 border border-candle-amber/20 rounded-sm hover:border-candle-amber/40"
+                className="mono text-xs tracking-widest text-foreground/60 hover:text-foreground transition-colors uppercase px-4 py-2 border border-foreground/20 rounded-sm hover:border-foreground/40"
               >
                 Reject
               </button>

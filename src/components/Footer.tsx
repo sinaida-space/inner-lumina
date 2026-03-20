@@ -11,7 +11,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <h4 className="font-gothic text-xl text-candle-amber mb-3">The Altar of the Circuit</h4>
-            <p className="text-muted-foreground text-xs leading-relaxed mono">
+            <p className="text-foreground/50 text-xs leading-relaxed mono">
               A spiritual machine for self-reflection. Look inward, trace the circuits of memory.
             </p>
           </div>
@@ -52,10 +52,10 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="text-center py-8 border-t border-border/20 space-y-2">
-          <div className="mono text-xs text-candle-amber/40 tracking-widest uppercase">
+          <div className="mono text-xs text-foreground/30 tracking-widest uppercase">
             The Altar of the Circuit — v0.1 — © {new Date().getFullYear()}
           </div>
-          <div className="mono text-xs text-ghost-teal/40">
+          <div className="mono text-xs text-foreground/20">
             Made with good vibes by{" "}
             <a href="https://sinaida.eu/" target="_blank" rel="noopener noreferrer" className="text-ghost-teal/50 hover:text-ghost-teal transition-colors">
               Sinaida
@@ -87,7 +87,7 @@ export default function Footer() {
                 <h3 className="font-gothic text-xl text-ghost-teal">Privacy Policy</h3>
                 <button
                   onClick={() => setShowPrivacy(false)}
-                  className="mono text-xs text-candle-amber/50 hover:text-candle-amber/80 transition-colors"
+                  className="mono text-xs text-foreground/40 hover:text-foreground/80 transition-colors"
                 >
                   ✕
                 </button>

@@ -208,13 +208,13 @@ export default function ConstellationShareCanvas({ answers, onClose }: Constella
             </button>
             <button
               onClick={onClose}
-              className="mono text-xs tracking-widest text-candle-amber/50 hover:text-candle-amber/80 transition-colors uppercase px-6 py-3 border border-candle-amber/20 rounded-sm"
+              className="mono text-xs tracking-widest text-foreground/50 hover:text-foreground/80 transition-colors uppercase px-6 py-3 border border-foreground/20 rounded-sm"
             >
               Close
             </button>
           </div>
 
-          <p className="mono text-xs text-ghost-teal/50 text-center">
+          <p className="mono text-xs text-foreground/40 text-center">
             Share your constellation on Instagram Stories ✦
           </p>
         </motion.div>
