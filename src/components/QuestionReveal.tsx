@@ -69,7 +69,7 @@ export default function QuestionReveal({ questions, zoneColor, onAnswer, answere
             className="flex flex-col items-center gap-6"
           >
             <StarButton color={zoneColor} onClick={pickRandom} disabled={allDone} />
-            <div className="mono text-xs tracking-widest text-foreground/50 uppercase">
+            <div className="mono text-xs tracking-widest text-muted-foreground uppercase">
               {allDone
                 ? "All fragments collected"
                 : `${remaining.length} fragments remaining`}
