@@ -82,7 +82,7 @@ export default function QuestionReveal({ questions, zoneColor, onAnswer, answere
             animate={{ opacity: 1, x: 0, scale: 1, filter: "blur(0px)" }}
             exit={{ opacity: 0, x: -80, scale: 0.9, filter: "blur(12px)" }}
             transition={oracleTransition}
-            className="glass-screen bloom-border rounded-lg p-8 md:p-10 max-w-xl w-full relative"
+            className="glass-screen bloom-border hover-bloom rounded-lg p-8 md:p-10 max-w-xl w-full relative"
           >
             {/* Particle wind decorative dots */}
             {Array.from({ length: 12 }).map((_, i) => (

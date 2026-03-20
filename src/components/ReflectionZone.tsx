@@ -48,7 +48,7 @@ export default function ReflectionZone({
         >
           {title}
         </h2>
-        <p className="text-foreground/50 mono text-xs max-w-md mx-auto">
+        <p className="text-muted-foreground mono text-xs max-w-md mx-auto">
           {subtitle}
         </p>
 
