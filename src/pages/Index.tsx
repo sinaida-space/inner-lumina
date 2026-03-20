@@ -130,7 +130,7 @@ export default function Index() {
             <br />
             Reflection
           </h1>
-          <p className="text-foreground/60 mono text-sm max-w-lg mx-auto mb-12">
+          <p className="text-muted-foreground mono text-sm max-w-lg mx-auto mb-12">
             The machine is listening. Scroll to descend into the circuitry of self.
           </p>
           <motion.div
