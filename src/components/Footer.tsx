@@ -52,7 +52,7 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="text-center py-8 border-t border-border/20 space-y-2">
-          <div className="mono text-xs text-foreground/30 tracking-widest uppercase">
+          <div className="mono text-xs text-candle-amber/40 tracking-widest uppercase">
             The Altar of the Circuit — v0.1 — © {new Date().getFullYear()}
           </div>
           <div className="mono text-xs text-foreground/20">
