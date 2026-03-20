@@ -206,4 +206,39 @@
     initial-value: 0deg;
     inherits: false;
   }
+
+  /* Meditative hover bloom with particles */
+  .hover-bloom {
+    position: relative;
+    transition: transform 0.4s var(--oracle-ease), box-shadow 0.5s var(--oracle-ease);
+  }
+
+  .hover-bloom:hover {
+    transform: scale(1.02);
+    box-shadow:
+      0 0 20px hsla(320, 100%, 60%, 0.12),
+      0 0 40px hsla(35, 100%, 55%, 0.08),
+      0 0 60px hsla(170, 40%, 50%, 0.06);
+  }
+
+  .hover-bloom::after {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border-radius: inherit;
+    background: radial-gradient(
+      circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      hsla(320, 100%, 60%, 0.06) 0%,
+      hsla(35, 100%, 55%, 0.04) 30%,
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .hover-bloom:hover::after {
+    opacity: 1;
+  }
 }
