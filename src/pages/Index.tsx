@@ -69,8 +69,24 @@ const oracleTransition = {
   ease: [0.22, 1, 0.36, 1] as const,
 };
 
+// Shuffle helper
+function shuffleArray<T>(arr: T[]): T[] {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
 export default function Index() {
   const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [showConstellationShare, setShowConstellationShare] = useState(false);
+
+  // Shuffle questions once on mount using useRef
+  const shuffledZones = useRef(
+    ZONES.map((zone) => ({ ...zone, questions: shuffleArray(zone.questions) }))
+  ).current;
 
   const handleAnswer = useCallback((question: string, answer: string) => {
     setAnswers((prev) => ({ ...prev, [question]: answer }));
