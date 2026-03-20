@@ -136,7 +136,7 @@ export default function Index() {
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="text-foreground/40 text-2xl"
+            className="text-candle-amber/40 text-2xl"
           >
             ↓
           </motion.div>
