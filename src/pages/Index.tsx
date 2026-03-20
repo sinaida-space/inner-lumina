@@ -199,7 +199,7 @@ export default function Index() {
             viewport={{ once: true }}
             transition={{ ...oracleTransition, delay: 0.3 }}
             onClick={() => setShowConstellationShare(true)}
-            className="mono text-xs tracking-widest text-candle-amber hover:text-candle-amber/80 transition-colors uppercase px-8 py-4 border border-candle-amber/40 rounded-sm hover:border-candle-amber/60 bloom-border mt-12"
+            className="mono text-xs tracking-widest text-candle-amber hover:text-candle-amber/80 transition-colors uppercase px-8 py-4 border border-candle-amber/40 rounded-sm hover:border-candle-amber/60 bloom-border hover-bloom mt-12"
           >
             ✦ Share My Constellation
           </motion.button>
