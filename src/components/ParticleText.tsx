@@ -115,9 +115,23 @@ export default function ParticleText({ text, color, className = "" }: ParticleTe
     const updateProgress = () => {
       const rect = container.getBoundingClientRect();
       const viewH = window.innerHeight;
-      // Progress: 0 when section enters bottom, 1 when fully centered
-      const raw = 1 - (rect.top / (viewH * 0.7));
-      progressRef.current = Math.max(0, Math.min(1, raw));
+      const centerY = rect.top + rect.height / 2;
+      const screenCenter = viewH / 2;
+      const distFromCenter = Math.abs(centerY - screenCenter);
+      const threshold = viewH * 0.7;
+      
+      // Form particles as element enters
+      const enterProgress = 1 - (rect.top / (viewH * 0.7));
+      // Stay fully formed while within 70% of screen center
+      if (distFromCenter < threshold && enterProgress >= 1) {
+        progressRef.current = 1;
+      } else if (centerY < screenCenter - threshold) {
+        // Dissolve when scrolled well past
+        const exitRaw = 1 - (screenCenter - threshold - centerY) / (viewH * 0.3);
+        progressRef.current = Math.max(0, Math.min(1, exitRaw));
+      } else {
+        progressRef.current = Math.max(0, Math.min(1, enterProgress));
+      }
     };
 
     let time = 0;
