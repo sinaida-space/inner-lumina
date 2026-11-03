@@ -66,7 +66,7 @@ export default function ParticleText({ text, color, className = "" }: ParticleTe
     const fontSize = Math.min(w * 0.1, 72);
     ctx.clearRect(0, 0, w, h);
     ctx.fillStyle = "#fff";
-    ctx.font = `${fontSize}px CloisterBlack, serif`;
+    ctx.font = `${fontSize}px UnifrakturMaguntia, serif`;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText(text, w / 2, h / 2);

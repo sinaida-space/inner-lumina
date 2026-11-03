@@ -14,7 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        gothic: ["CloisterBlack", "serif"],
+        gothic: ["UnifrakturMaguntia", "serif"],
         mono: ["JetBrains Mono", "monospace"],
         body: ["Inter", "sans-serif"],
       },

@@ -106,7 +106,7 @@ export default function ConstellationShareCanvas({ answers, onClose }: Constella
     // Title
     ctx.textAlign = "center";
     ctx.fillStyle = `hsl(35, 100%, 55%)`;
-    ctx.font = "48px 'Cloister Black', serif";
+    ctx.font = "48px 'UnifrakturMaguntia', serif";
     ctx.fillText("Your Soul Map", W / 2, 140);
 
     // Subtitle
