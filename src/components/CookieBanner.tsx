@@ -31,7 +31,7 @@ export default function CookieBanner() {
         >
           <div className="glass-screen bloom-border rounded-lg max-w-2xl mx-auto p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">
             <p className="text-foreground/80 text-sm mono flex-1">
-              This site uses essential cookies only for functionality. No personal data is stored or shared.
+              This site sets no cookies and runs no analytics. Your browser only remembers that you closed this notice.
             </p>
             <div className="flex gap-3 shrink-0">
               <button
